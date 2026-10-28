@@ -1,1 +1,21 @@
+import pendulum
+from airflow.sdk import dag, task
+
+@dag(
+    dag_id="datetime_dag",
+    schedule="30 9 * * 3",
+    start_date=pendulum.datetime(
+        2026, 1, 1, tz="Asia/Kolkata"
+    ),
+    catchup=False
+)
+def date_time():
+
+    @task
+    def show_time():
+        print(pendulum.now("Asia/Kolkata"))
+
+    show_time()
+
+date_time()
 
